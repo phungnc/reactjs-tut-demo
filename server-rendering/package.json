@@ -12,6 +12,7 @@
   "author": "phung.nc@aris-vn.com",
   "license": "ISC",
   "dependencies": {
+    "reactify": "^1.1.1",
     "superagent": "^1.2.0"
   }
 }

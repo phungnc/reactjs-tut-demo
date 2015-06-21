@@ -63,7 +63,7 @@ var Avatars = React.createClass({
     var self = this;
     Request.get('http://localhost:3000/api/employees', function(res) {
     //console.log(res);
-    self.setState({avatars: res.body});
+      if(res.body != undefined) self.setState({avatars: res.body});
     });
   },
 

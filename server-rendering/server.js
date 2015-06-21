@@ -13,6 +13,7 @@ var app     = Express();
 // Use jade template
 app.set('views', './');
 app.set('view engine', 'Jade');
+app.use(Express.static(__dirname + '/'));
 
 app.get('/', function(req, res){
     res.render('index', {
@@ -30,7 +31,6 @@ app.get('/', function(req, res){
 
 
 var server = app.listen(5000, function(){
-  console.log(server);
   var host = server.address().address;
   var port = server.address().port;
   
