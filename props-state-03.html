@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
+  <title>Basic Example Props</title>
+</head>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+  <script type="text/jsx">
+  
+    var Avatar = React.createClass({
+      propTypes: {
+        name: React.PropTypes.string.isRequired,
+        width: React.PropTypes.number.isRequired,
+        height: React.PropTypes.number.isRequired,
+        initialLike: React.PropTypes.bool.isRequired,
+      },
+      
+      getInitialState() {
+        return {
+          liked: this.props.initialLike
+        };
+      },
+
+      onClick() {
+        this.setState({liked: !this.state.liked});
+      },
+
+      render() {
+        var textLike = this.state.liked ? 'like' : 'haven\'t liked';
+        return (
+          <li>
+            <img  src={this.props.src} width={this.props.width} height={this.props.height} alt="alt" />
+            <span>{this.props.name}</span>
+            <button onClick={this.onClick}>{textLike}</button>
+          </li>
+        );
+      }
+
+    });
+
+    var Avatars = React.createClass({
+    
+      getInitialState() {
+        return {
+          avatars: [
+            {name: "Avatar 1", height: 100, width: 100, initialLike: false, src: "http://canime.files.wordpress.com/2010/05/mask-dtb.jpg"},
+            {name: "Avatar 2", height: 100, width: 100, initialLike: true, src: "http://z4.ifrm.com/30544/116/0/a3359905/avatar-3359905.jpg"},
+            {name: "Avatar 3", height: 100, width: 100, initialLike: false, src: "http://www.dodaj.rs/f/O/IM/OxPONIh/134.jpg"}
+          ]
+        }
+      },
+
+      render() {  
+        var avatars = this.state.avatars.map(function(avatar){
+          return <Avatar name={avatar.name} width={avatar.width} height={avatar.height} src={avatar.src} initialLike={avatar.initialLike} />;
+        });
+        return (
+          <ul>
+            {avatars}
+          </ul>
+        );
+      }
+
+    });
+
+    var AvatarsComponent = React.render(<Avatars />, document.body);
+
+  </script>
+</body>
+</html>

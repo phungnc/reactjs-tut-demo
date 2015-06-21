@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
+  <title>Basic Example Hello world</title>
+</head>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+  <script type="text/jsx">
+  
+    var HelloComponent = React.createClass({
+      render() {
+        return <div className="hello">Hello, {this.props.name}</div>
+      }
+    })
+    var helloEl = <HelloComponent name=' Phúng' />;
+    
+    React.render(
+        helloEl,
+        document.body
+    );
+    
+  </script>
+</body>
+</html>

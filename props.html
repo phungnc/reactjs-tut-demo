@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
+  <title>Basic Example Props</title>
+</head>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+  <script type="text/jsx">
+  
+    var Avatar = React.createClass({
+      propTypes: {
+        name: React.PropTypes.string.isRequired,
+        width: React.PropTypes.number.isRequired,
+        height: React.PropTypes.number.isRequired
+      },
+      render() {
+        var src='http://canime.files.wordpress.com/2010/05/mask-dtb.jpg';
+        return (
+          <div>
+            <img src={src} width={this.props.width} height={this.props.height} alt="alt" />
+            <span>{this.props.name}</span>
+          </div>
+        );
+      }
+
+    });
+    
+
+    var AvatarEl = <Avatar name="Foo" width={100} height={100}/>;
+    
+    var AvatarComponent = React.render(AvatarEl, document.body);
+
+    AvatarComponent.setProps({name: "Bar"}, function(){
+      alert("AvatarComponent setProps Done!");
+    });
+
+    AvatarComponent.replaceProps({name: "Bar-Foo"}, function(){
+      alert("AvatarComponent replaceProps Done!");
+    });
+    
+    
+  </script>
+</body>
+</html>

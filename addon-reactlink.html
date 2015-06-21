@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
+  <title>Basic Example Props</title>
+</head>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react-with-addons.js"></script>
+  <script type="text/jsx">
+/*
+    var WithLink = React.createClass({
+      mixins: [React.addons.LinkedStateMixin],
+      getInitialState: function() {
+        return {message: 'Hello!'};
+      },
+      render: function() {
+        return <input type="text" valueLink={this.linkState('message')} />;
+      }
+    });
+*/
+    var Link = React.createClass({
+      mixins: [React.addons.LinkedStateMixin],
+      getInitialState: function() {
+        return {message: 'Hello!'};
+      },
+      handleChange: function(newValue) {
+        //console.log(event.target.value);
+        this.setState({message: newValue});
+      },
+      render: function() {
+       var valueLink = {
+          value: this.state.message,
+          requestChange: this.handleChange
+        };
+        var valueLinkk =this.linkState('message');
+        console.log(valueLinkk);
+        return (
+          <div>
+            <p>{valueLink.value}</p>
+            <input type="text" valueLink={valueLink} />
+          </div>
+        );
+      }
+    });
+    
+    React.render(<Link />, document.body);
+  </script>
+</body>
+</html>

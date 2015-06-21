@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
+  <title>Basic Example Props</title>
+</head>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+  <script type="text/jsx">
+  
+    var Avatar = React.createClass({
+      propTypes: {
+        name: React.PropTypes.string.isRequired,
+        width: React.PropTypes.number.isRequired,
+        height: React.PropTypes.number.isRequired
+      },
+      
+      getInitialState() {
+        return {
+          //src: 'http://canime.files.wordpress.com/2010/05/mask-dtb.jpg'
+          src: this.props.src
+        };
+      },
+
+      onClick() {
+        this.setState({src: 'http://38.media.tumblr.com/9f96b52d8fda03c77d0b620d4f12a128/tumblr_n0lvu7fSqE1sont7fo1_500.gif'});
+      },
+
+      render() {
+        //var src='http://canime.files.wordpress.com/2010/05/mask-dtb.jpg';
+        return (
+          <div>
+            <img  src={this.state.src} width={this.props.width} height={this.props.height} alt="alt" />
+            <span>{this.props.name}</span>
+            <button onClick={this.onClick}>So HOT!!!!</button>
+          </div>
+        );
+      }
+
+    });
+    
+
+    var AvatarEl = <Avatar name="Foo" width={100} height={100} src='http://canime.files.wordpress.com/2010/05/mask-dtb.jpg' />;
+    
+    var AvatarComponent = React.render(AvatarEl, document.body);
+
+    
+  </script>
+</body>
+</html>
