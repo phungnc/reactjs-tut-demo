@@ -2,7 +2,7 @@
 
 var React       = require('react'),
     Request     = require('superagent'),
-    Router      = require('react-route');
+    Router      = require('react-router');
 
 var Route        = Router.Route,
     RouteHandler = Router.RouteHandler,
@@ -41,7 +41,7 @@ var Avatar = React.createClass({
       <li key={this.props.id}>
         <span>{this.props.id}</span>
         <img  src={this.props.src} width={this.props.width} height={this.props.height} alt="alt" />
-        <span>{this.props.name}</span>
+        <Link to="avatar"><span>{this.props.name}</span></Link>
         <button onClick={this.onClick}>{textLike}</button>
         <button onClick={this._onDelete}>Delete</button>
       </li>
@@ -94,18 +94,26 @@ var Avatars = React.createClass({
   }
 });
 
-<Route path="/" handler={App}>
-  <DefaultRoute handler={Avatars} />
-  <Route name="avatars" handler={Avatars} />
-  <Route name="avatar" handler={Avatar}
-</Route>
+var routes  = (
+  <Route path="/"  handler={App}>
+    <DefaultRoute handler={Avatars} />
+    <Route name="avatars" handler={Avatars} />
+    <Route name="avatar" handler={Avatar} />
+  </Route>
+);
 
 var App = React.createClass({
-  return(){
-    <div>
-      <RouteHandler />  
-    </div>
+  render(){
+    return(
+      <div>
+        <RouteHandler />
+      </div>
+    )
   }
-})
-
+});
+////Finally we need to listen to the url and render the application.
+//Router.run(routes, Router.HashLocation, function(Root) {
+//  React.render(<Root/>, document.body);
+//});
+App.routes = routes;
 module.exports = App;

@@ -12,6 +12,8 @@
   "author": "phung.nc@aris-vn.com",
   "license": "ISC",
   "dependencies": {
+    "react": "^0.13.3",
+    "react-router": "^0.13.3",
     "reactify": "^1.1.1",
     "superagent": "^1.2.0"
   }
