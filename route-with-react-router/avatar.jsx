@@ -1,7 +1,12 @@
 var React   = require('react'),
     request = require('superagent'),
     Router  = require('react-router');
-    
+
+var Route         = Router.Route;
+var RouteHandler  = Router.RouteHandler;
+var DefaultRoute  = Router.DefaultRoute;
+var Link          = Router.Link;
+
 var Avatar = React.createClass({
   propTypes: {
     id: React.PropTypes.string.isRequired,
@@ -33,7 +38,7 @@ var Avatar = React.createClass({
       <li key={this.props.id}>
         <span>{this.props.id}</span>
         <img  src={this.props.src} width={this.props.width} height={this.props.height} alt="alt" />
-        <a href="#avatar"><span>{this.props.name}</span></a>
+        <Link to="avatar"><span>{this.props.name}</span></Link>
         <button onClick={this.onClick}>{textLike}</button>
         <button onClick={this._onDelete}>Delete</button>
       </li>
@@ -85,9 +90,6 @@ var Avatars = React.createClass({
   }
 });
 
-var Route         = Router.Route;
-var RouteHandler  = Router.RouteHandler;
-
 // declare our routes and their hierarchy
 /*
 var routes  = (
@@ -101,7 +103,7 @@ var routes  = (
 
 var routes  = (
   <Route handler={App}>
-    <Route name="/" handler={Avatars} />
+    <DefaultRoute handler={Avatars} />
     <Route name="avatars" handler={Avatars} />
     <Route name="avatar" handler={Avatar} />
   </Route>

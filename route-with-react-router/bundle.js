@@ -24084,7 +24084,12 @@ module.exports = function(arr, fn, initial){
 var React   = require('react'),
     request = require('superagent'),
     Router  = require('react-router');
-    
+
+var Route         = Router.Route;
+var RouteHandler  = Router.RouteHandler;
+var DefaultRoute  = Router.DefaultRoute;
+var Link          = Router.Link;
+
 var Avatar = React.createClass({displayName: "Avatar",
   propTypes: {
     id: React.PropTypes.string.isRequired,
@@ -24116,7 +24121,7 @@ var Avatar = React.createClass({displayName: "Avatar",
       React.createElement("li", {key: this.props.id}, 
         React.createElement("span", null, this.props.id), 
         React.createElement("img", {src: this.props.src, width: this.props.width, height: this.props.height, alt: "alt"}), 
-        React.createElement("a", {href: "#avatar"}, React.createElement("span", null, this.props.name)), 
+        React.createElement(Link, {to: "avatar"}, React.createElement("span", null, this.props.name)), 
         React.createElement("button", {onClick: this.onClick}, textLike), 
         React.createElement("button", {onClick: this._onDelete}, "Delete")
       )
@@ -24168,9 +24173,6 @@ var Avatars = React.createClass({displayName: "Avatars",
   }
 });
 
-var Route         = Router.Route;
-var RouteHandler  = Router.RouteHandler;
-
 // declare our routes and their hierarchy
 /*
 var routes  = (
@@ -24184,7 +24186,7 @@ var routes  = (
 
 var routes  = (
   React.createElement(Route, {handler: App}, 
-    React.createElement(Route, {name: "/", handler: Avatars}), 
+    React.createElement(DefaultRoute, {handler: Avatars}), 
     React.createElement(Route, {name: "avatars", handler: Avatars}), 
     React.createElement(Route, {name: "avatar", handler: Avatar})
   )
