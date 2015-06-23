@@ -188,7 +188,7 @@ var Avatars = React.createClass({displayName: "Avatars",
 });
 
 var routes  = (
-  React.createElement(Route, {path: "/", handler: App}, 
+  React.createElement(Route, {handler: App}, 
     React.createElement(DefaultRoute, {handler: Avatars}), 
     React.createElement(Route, {name: "avatars", handler: Avatars}), 
     React.createElement(Route, {name: "avatar", handler: Avatar})

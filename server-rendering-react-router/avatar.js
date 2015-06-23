@@ -95,7 +95,7 @@ var Avatars = React.createClass({
 });
 
 var routes  = (
-  <Route path="/"  handler={App}>
+  <Route handler={App}>
     <DefaultRoute handler={Avatars} />
     <Route name="avatars" handler={Avatars} />
     <Route name="avatar" handler={Avatar} />
