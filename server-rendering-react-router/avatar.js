@@ -111,9 +111,5 @@ var App = React.createClass({
     )
   }
 });
-////Finally we need to listen to the url and render the application.
-//Router.run(routes, Router.HashLocation, function(Root) {
-//  React.render(<Root/>, document.body);
-//});
 App.routes = routes;
 module.exports = App;

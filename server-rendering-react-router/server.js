@@ -32,12 +32,11 @@ app.use(Express.static(__dirname + '/'));
 
 var routes = avatar.routes;
 
-console.log(routes);
 
 app.use(function (req, res) {
-  Router.run(routes, req.path, function(Handler) {
+  Router.run(routes, req.path, function(Root) {
     res.render('index', {
-      markup: React.renderToString(React.createElement(Handler))
+      markup: React.renderToString(React.createElement(Root))
   })
   })
 });
