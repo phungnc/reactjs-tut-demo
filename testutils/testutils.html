@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
+  <title>Basic React TestUtils Testing</title>
+</head>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react-with-addons.js"></script>
+  <script type="text/jsx">
+    var Hello = React.createClass({
+      render: function() {
+        return (
+          <div>{this.props.name}</div>
+        );
+      }
+    });
+    var OnlyMe = React.createClass({
+      render: function() {
+        return (
+          <div>{this.props.name}</div>
+        );
+      }
+    });
+    var Link = React.createClass({
+      mixins: [React.addons.LinkedStateMixin],
+      getInitialState: function() {
+        return {message: 'Hello!'};
+      },
+      handleChange: function(newValue) {
+        this.setState({message: newValue});
+      },
+      render: function() {
+       var valueLink = {
+          value: this.state.message,
+          requestChange: this.handleChange
+        };
+        var valueLinkk =this.linkState('message');
+        return (
+          <div>
+            <Hello name="FOO "/>
+            <Hello name="BAR"/>
+            <OnlyMe name="OnlyMe"/>
+            <p className="title">{valueLink.value}</p>
+            <span className="title">World!</span>
+            <span className="sub-title">My Name is C.P</span>
+            <input type="text" valueLink={valueLink} />
+          </div>
+        );
+      }
+    });
+    
+    var LinkComponent = React.render(<Link />, document.body);
+    
+    // TestUtils
+    var TestUtils = React.addons.TestUtils;
+    // Assert
+    document.write("=== Assert Testing Type ===");
+    //
+    document.write("<br/>");
+    document.write("<br/>");
+    document.write("<b>1.isElement: check if Link is an Element</b>");
+    document.write("<br/>");
+    document.write(">>>Result is: ",TestUtils.isElement(<Link />));
+    //
+    document.write("<br/>");
+    document.write("<br/>");
+    document.write("<b>2.isElementOfType : check if Link is is a ReactElement whose type is of a React componentClass</b>");
+    document.write("<br/>");
+    document.write(">>>Result is: ",TestUtils.isElementOfType(<Link />, Link));
+    //
+    document.write("<br/>");
+    document.write("<br/>");
+    document.write("<b>3.isDOMComponent: check if Link instance is a DOM component (such as a <div> or <span>)</b>");
+    document.write("<br/>");
+    document.write(">>>Result is: ",TestUtils.isDOMComponent(LinkComponent));
+    //
+    document.write("<br/>");
+    document.write("<br/>");
+    document.write("<b>4.isCompositeComponent : check if Link instance is a composite component (created with React.createClass())</b>");
+    document.write("<br/>");
+    document.write(">>>Result is: ",TestUtils.isCompositeComponent(LinkComponent));
+    //
+    document.write("<br/>");
+    document.write("<br/>");
+    document.write("<b>5.isCompositeComponentWithType : check if Link instance is a composite component (created with React.createClass()) whose type is of a React componentClass.</b>");
+    document.write("<br/>");
+    document.write(">>>Result is: ",TestUtils.isCompositeComponentWithType(LinkComponent, Link));
+    //
+    document.write("<br/>");
+    document.write("<br/>");
+    document.write("=== Component Testing Type ===");
+    document.write("<br/>");
+    document.write("<b>1.array findAllInRenderedTree(ReactComponent tree, function test)</b>");
+    document.write("<br/>");
+    document.write("Traverse all components in tree and accumulate all components where test(component) is true. This is not that useful on its own, but it's used as a primitive for other test utils.");
+    document.write("<br/>");
+    document.write(">>> Result is: ",
+      TestUtils.findAllInRenderedTree(LinkComponent, 
+        function(component) { return component.tagName === "P" }
+      ).map(function(component){ return component.getDOMNode().textContent })
+    );
+    //
+    document.write("<br/>");
+    document.write("<br/>");
+    document.write("<b>2.array scryRenderedDOMComponentsWithClass(ReactComponent tree, string className)</b>");
+    document.write("<br/>");
+    document.write("Finds all instances of components in the rendered tree that are DOM components with the class name matching className");
+    document.write("<br/>");
+    document.write(">>> Result is: ",TestUtils.scryRenderedDOMComponentsWithClass(LinkComponent, 
+      'title'
+      ).map(function(component){ return component.getDOMNode().textContent }));
+    //
+    document.write("<br/>");
+    document.write("<br/>");
+    document.write("<b>3.ReactComponent findRenderedDOMComponentWithClass(ReactComponent tree, string className)</b>");
+    document.write("<br/>");
+    document.write("Like scryRenderedDOMComponentsWithClass() but expects there to be one result, and returns that one result, or throws exception if there is any other number of matches besides one.");
+    document.write("<br/>");
+    document.write(">>> Result is: ",TestUtils.findRenderedDOMComponentWithClass(LinkComponent, 
+      'sub-title'
+      ).getDOMNode().textContent);
+    //
+    document.write("<br/>");
+    document.write("<br/>");
+    document.write("<b>4.array scryRenderedDOMComponentsWithTag(ReactComponent tree, string tagName)</b>");
+    document.write("<br/>");
+    document.write("Finds all instances of components in the rendered tree that are DOM components with the tag name matching tagName");
+    document.write("<br/>");
+    document.write(">>> Result is: ",TestUtils.scryRenderedDOMComponentsWithTag(LinkComponent, 
+      'span'
+      ).map(function(component){ return component.getDOMNode().textContent }));
+    //
+    document.write("<br/>");
+    document.write("<br/>");
+    document.write("<b>5.ReactComponent findRenderedDOMComponentWithTag(ReactComponent tree, string tagName)</b>");
+    document.write("<br/>");
+    document.write("Like scryRenderedDOMComponentsWithTag() but expects there to be one result, and returns that one result, or throws exception if there is any other number of matches besides one.");
+    document.write("<br/>");
+    document.write(">>> Result is: ",TestUtils.findRenderedDOMComponentWithTag(LinkComponent, 
+      'p'
+      ).getDOMNode().textContent);
+    //
+    document.write("<br/>");
+    document.write("<br/>");
+    document.write("<b>6.array scryRenderedComponentsWithType(ReactComponent tree, function componentClass)</b>");
+    document.write("<br/>");
+    document.write("Finds all instances of components with type equal to componentClass");
+    document.write("<br/>");
+    document.write(">>> Result is: ",TestUtils.scryRenderedComponentsWithType(LinkComponent, 
+      Hello
+      ).map(function(component){ return component.getDOMNode().textContent }));
+    //
+    document.write("<br/>");
+    document.write("<br/>");
+    document.write("<b>7.ReactComponent findRenderedComponentWithType(ReactComponent tree, function componentClass)</b>");
+    document.write("<br/>");
+    document.write("Same as scryRenderedComponentsWithType() but expects there to be one result and returns that one result, or throws exception if there is any other number of matches besides one.");
+    document.write("<br/>");
+    document.write(">>> Result is: ",TestUtils.findRenderedComponentWithType(LinkComponent, 
+      OnlyMe
+      ).getDOMNode().textContent);
+    //
+  </script>
+</body>
+</html>
