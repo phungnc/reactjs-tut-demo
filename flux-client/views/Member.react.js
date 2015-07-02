@@ -18,7 +18,7 @@ var ToggleStar   = require('./toggle-star.jsx');
 var Delete       = require('./delete.jsx');
 var Colors       = mui.Styles.Colors ;
 
-var MemberActionCreators = require('../actions/MemberActionCreators');
+var MemberActionCreators = require('../actions/MemberActions');
     
 var Member = React.createClass({
   childContextTypes: {
@@ -38,8 +38,7 @@ var Member = React.createClass({
     this.setState({liked: !this.state.liked});
   },
   _onDelete() {
-    //this.props.onDelete(this.props.id);
-    MemberActionCreators.destroy(this.props.id);
+    MemberActions.destroy(this.props.id);
     
   },
   render() {
