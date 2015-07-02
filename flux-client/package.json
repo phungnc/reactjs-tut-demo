@@ -1,0 +1,27 @@
+{
+  "name": "reactjs-jest",
+  "version": "1.0.0",
+  "description": "reactjs jest demo",
+  "main": "bundle.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "scriptPreprocessor": "preprocessor.js",
+    "unmockedModulePathPatterns": [
+      "node_modules/react"
+    ]
+  },
+  "keywords": [
+    "reactjs",
+    "jest"
+  ],
+  "author": "phung.nc@aris-vn.com",
+  "license": "ISC",
+  "devDependencies": {
+    "babelify": "^6.1.2",
+    "events": "^1.0.2",
+    "jest-cli": "^0.4.13",
+    "react-tools": "^0.13.3"
+  }
+}
