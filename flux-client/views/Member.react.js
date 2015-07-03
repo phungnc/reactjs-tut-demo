@@ -18,7 +18,7 @@ var ToggleStar   = require('./toggle-star.jsx');
 var Delete       = require('./delete.jsx');
 var Colors       = mui.Styles.Colors ;
 
-var MemberActionCreators = require('../actions/MemberActions');
+var MemberActions = require('../actions/MemberActions');
     
 var Member = React.createClass({
   childContextTypes: {

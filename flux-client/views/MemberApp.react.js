@@ -29,7 +29,9 @@ var MemberApp = React.createClass({
     };
   },
   getInitialState() {
-    return MemberStore.getMembers();
+    return {
+      members: MemberStore.getMembers()
+    }
   },
   deleteItem(id){
     this.setState({
