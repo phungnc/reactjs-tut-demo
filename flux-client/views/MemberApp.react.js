@@ -32,13 +32,6 @@ var MemberApp = React.createClass({
       members: MemberStore.getMembers()
     }
   },
-//  deleteItem(id){
-//    this.setState({
-//      members: this.state.members.filter(function(member){
-//        return member.id !== id;
-//      })
-//    });
-//  },
   componentDidMount() {
     MemberStore.on('change',this._onChange);
   },
@@ -53,7 +46,7 @@ var MemberApp = React.createClass({
     var members = this.state.members.map(function(member){
       return (
         <div>
-          <Member id={member.id} onDelete={this.deleteItem} name={member.name} initialLike={member.like} src={member.src}/>
+          <Member id={member.id} name={member.name} initialLike={member.like} src={member.src}/>
           <ListDivider inset={true}/>
         </div>
         );
