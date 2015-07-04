@@ -22,7 +22,6 @@ var MemberApp = React.createClass({
   childContextTypes: {
     muiTheme: React.PropTypes.object
   },
-
   getChildContext() {
     return {
       muiTheme: ThemeManager.getCurrentTheme()
@@ -33,12 +32,22 @@ var MemberApp = React.createClass({
       members: MemberStore.getMembers()
     }
   },
-  deleteItem(id){
-    this.setState({
-      members: this.state.members.filter(function(member){
-        return member.id !== id;
-      })
-    });
+//  deleteItem(id){
+//    this.setState({
+//      members: this.state.members.filter(function(member){
+//        return member.id !== id;
+//      })
+//    });
+//  },
+  componentDidMount() {
+    MemberStore.on('change',this._onChange);
+  },
+  componentWillUnmount() {
+    MemberStore.removeListener('change',this._onChange);
+  },
+  // Event hanlder for 'change' event comming from the MemberStore
+  _onChange() {
+    this.setState({members: MemberStore.getMembers()});
   },
   render() {
     var members = this.state.members.map(function(member){

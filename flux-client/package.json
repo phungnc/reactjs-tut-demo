@@ -19,6 +19,7 @@
   "author": "phung.nc@aris-vn.com",
   "license": "ISC",
   "devDependencies": {
+    "array.prototype.findindex": "^1.0.0",
     "babelify": "^6.1.2",
     "events": "^1.0.2",
     "flux": "^2.0.3",
