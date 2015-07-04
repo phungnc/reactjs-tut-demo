@@ -10,7 +10,6 @@ module.exports = {
       type: MemberConstants.MEMBER_DESTROY, 
       id: id
     });
-    
   }
 
 };

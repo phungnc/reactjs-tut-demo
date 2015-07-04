@@ -39,7 +39,6 @@ var Member = React.createClass({
   },
   _onDelete() {
     MemberActions.destroy(this.props.id);
-    
   },
   render() {
     var starColor = this.state.liked ? Colors.yellow800 : Colors.grey400; 
