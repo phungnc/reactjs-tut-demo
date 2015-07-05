@@ -17,7 +17,10 @@ function destroy(id) {
   let memberIndex = _members.findIndex(member => member.id == id);
   delete _members[memberIndex];
 };
-
+function update(id, updates) {
+    let memberIndex = _members.findIndex(member => member.id == id);
+    _members[memberIndex].like = updates.like;
+};
 class MemberStore extends EventEmitter {
   constructor() {
     super();
@@ -25,6 +28,14 @@ class MemberStore extends EventEmitter {
       switch(action.type) {
         case MemberConstants.MEMBER_DESTROY:
           destroy(action.id);
+          this.emit('change');
+          break;
+        case MemberConstants.MEMBER_UNLIKE:
+          update(action.id, {like: false});
+          this.emit('change');
+          break;
+        case MemberConstants.MEMBER_LIKE:
+          update(action.id, {like: true});
           this.emit('change');
           break;
       }

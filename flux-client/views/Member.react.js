@@ -24,30 +24,25 @@ var Member = React.createClass({
   childContextTypes: {
     muiTheme: React.PropTypes.object
   },
-  getInitialState() {
-    return {
-      liked: this.props.initialLike
-    };
-  },
   getChildContext() {
     return {
       muiTheme: ThemeManager.getCurrentTheme()
     };
   },
-  onClick() {
-    this.setState({liked: !this.state.liked});
+  _onClick() {
+    MemberActions.toggleLike(this.props);
   },
   _onDelete() {
     MemberActions.destroy(this.props.id);
   },
   render() {
-    var starColor = this.state.liked ? Colors.yellow800 : Colors.grey400; 
+    var starColor = this.props.like ? Colors.yellow800 : Colors.grey400; 
     return (
         <ListItem 
           leftAvatar={<Avatar src={this.props.src} />}
           rightIconButton={
             <div>
-              <IconButton onClick={this.onClick}><ToggleStar color={starColor} /></IconButton>
+              <IconButton onClick={this._onClick}><ToggleStar color={starColor} /></IconButton>
               <IconButton onClick={this._onDelete}><Delete color={Colors.red800} /></IconButton>
             </div>}
           secondaryTextLines={2}> 

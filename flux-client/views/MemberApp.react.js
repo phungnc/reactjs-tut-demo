@@ -46,7 +46,7 @@ var MemberApp = React.createClass({
     var members = this.state.members.map(function(member){
       return (
         <div>
-          <Member id={member.id} name={member.name} initialLike={member.like} src={member.src}/>
+          <Member id={member.id} name={member.name} like={member.like} src={member.src}/>
           <ListDivider inset={true}/>
         </div>
         );
